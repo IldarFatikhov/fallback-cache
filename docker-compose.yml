@@ -1,0 +1,17 @@
+version: '2'
+services:
+
+  fallback_cache_1:
+    image: ildarfatikhov/fallback_cache:latest
+    environment:
+      - DB_HOST=redis
+      - DB_PORT=6379
+    ports:
+      - 8080:8080
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+        - "6379"
