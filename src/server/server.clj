@@ -22,7 +22,7 @@
 
 (defroutes routes
   (GET "/geocode" [address] (ask address))
-  (not-found "<p>Page not found.</p>"))
+  (not-found "Page not found."))
 
 (defn start-me []
   (println "started on port:" cfg/port)
