@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/IldarFatikhov/fallback-cache/tree/master.svg?style=svg)](https://circleci.com/gh/IldarFatikhov/fallback-cache/tree/master)
+
 # Fallback cache
 
 A Clojure library designed to ... well, that part is up to you.
