@@ -3,7 +3,7 @@
  :retry {:retry-num 3
          :delay-ms 500}
  :db {:host #or [#env DB_HOST "localhost"]
-      :port #or [#env DB_PORT "6379"] 
+      :port #or [#env DB_PORT 6379] 
       :timeout 4000}
  :api-key #env GM_API_KEY
  :lag-bound 4000}
