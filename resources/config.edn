@@ -1,7 +1,7 @@
 {:response-timeout-ms 1500
  :port 8080
- :retry {:retry-num 3
-         :delay-ms 500}
+ :retry {:retry-num 4
+         :delay-ms 300}
  :db {:host #or [#env DB_HOST "localhost"]
       :port #or [#env DB_PORT 6379] 
       :timeout 4000}
