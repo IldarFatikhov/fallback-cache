@@ -37,7 +37,7 @@
   (let [port (get-in config [:db :port])]
     (if (nil? port)
       (log/error "Db port is not defined"))
-  (Integer/parseInt port)))
+    (int port)))
 
 (def db-timeout
   (let [timeout (get-in config [:db :timeout])]
