@@ -22,7 +22,15 @@ You should probably pay attention to: 1. The service returns answer in no more t
 
 docker-compose up
 
-С помощью docker-compose поднимается два экземпляра сервиса. На 80 порту поднимается Nginx балансирующий запросы на инстансы приложения. В качестве кэша используется Redis. 
+С помощью docker-compose поднимается два экземпляра сервиса. На 80 порту поднимается Nginx балансирующий запросы на инстансы приложения. В качестве кэша используется Redis. Scaling достигается путём увеличения количества инстансов приложения и шардингом Redis. 
+
+Доступны 2 ресурса:
+  - GET /geocode?address="some address"
+  - GET /cache-first/geocode?address="some address"
+
+Первый в окне 2-х секунд пытается получить результат https://maps.googleapis.com/maps/api/geocode/json. Если в течение 2-х секунд результат получить не удалось, возвращается кэшированное значение.
+
+Второй -- Возвращает значение напрямую из кэша и запускает процесс инвалидации кэша с https://maps.googleapis.com/maps/api/geocode/json.
 
 ## License
 
