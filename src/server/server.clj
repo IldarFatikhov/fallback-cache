@@ -26,7 +26,7 @@
 (defn cache-first-ask [address]
   (log/info address)
   (let [cached-result (cache/retrieve-cached-response address)]
-    (client/get-response-with-retries address)
+    (future (client/get-response-with-retries address))
     cached-result))
 
 (defroutes routes
