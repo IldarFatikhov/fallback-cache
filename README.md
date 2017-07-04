@@ -30,7 +30,7 @@ docker-compose up
 
 Первый в окне 2-х секунд пытается получить результат https://maps.googleapis.com/maps/api/geocode/json. Если в течение 2-х секунд результат получить не удалось, возвращается кэшированное значение.
 
-Второй -- Возвращает значение напрямую из кэша и запускает процесс инвалидации кэша с https://maps.googleapis.com/maps/api/geocode/json.
+Второй -- Возвращает значение напрямую из кэша и запускает в новом потоке процесс инвалидации кэша с https://maps.googleapis.com/maps/api/geocode/json.
 
 Для запросов к https://maps.googleapis.com/maps/api/geocode/json реализованы случайные по времены задержки.
 
