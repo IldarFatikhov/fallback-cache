@@ -10,5 +10,7 @@
                  [ring/ring-core "1.6.1"]
                  [javax.servlet/servlet-api "2.5"]
                  [diehard "0.5.2"]
-                 [aero "1.1.2"]]
+                 [aero "1.1.2"]
+                 [org.clojure/tools.logging "0.4.0"]
+                 [log4j/log4j "1.2.17"]]
   :main core.core)

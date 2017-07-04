@@ -5,7 +5,9 @@
             [compojure.core :refer (defroutes GET context)]
             [cache.cache :as cache]
             [client.client :as client]
-            [conf.config :as cfg]))
+            [conf.config :as cfg]
+            [cache.cache :as ch]
+            [clojure.tools.logging :as log]))
 
 (defn with-timeout [timeout-ms callback or-else]
   (let [fut (future (callback))
@@ -14,10 +16,12 @@
       (or-else)
       ret)))
 
+
 (defn ask [address]
-  (println address)
-  (with-timeout cfg/response-timeout-ms
-    #(client/get-response address)
+  (log/info address)
+  (with-timeout
+    cfg/response-timeout-ms
+    #(client/get-response-with-retries address)
     #(cache/retrieve-cached-response address)))
 
 (defroutes routes
@@ -25,5 +29,5 @@
   (not-found "Page not found."))
 
 (defn start-me []
-  (println "started on port:" cfg/port)
+  (log/info "started on port:" cfg/port)
   (http-kit/run-server (site #'routes) {:port cfg/port}))

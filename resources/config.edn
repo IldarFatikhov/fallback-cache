@@ -4,4 +4,6 @@
          :delay-ms 500}
  :db {:host #env DB_HOST
       :port #env DB_PORT
-      :timeout 4000}}
+      :timeout 4000}
+ :api-key #env GM_API_KEY
+ :lag-bound 4000}
