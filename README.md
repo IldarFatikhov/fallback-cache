@@ -32,6 +32,12 @@ docker-compose up
 
 Второй -- Возвращает значение напрямую из кэша и запускает процесс инвалидации кэша с https://maps.googleapis.com/maps/api/geocode/json.
 
+
+Переменные окружения:
+ - DB_HOST= хост Redis
+ - DB_PORT= порт Redis
+ - GM_API_KEY= ключ для доступа к апи https://maps.googleapis.com/maps/api/geocode
+
 ## License
 
 Copyright © 2017 FIXME
