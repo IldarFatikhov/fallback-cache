@@ -1,17 +1,49 @@
 version: '2'
 services:
 
+  nginx:
+    image: nginx
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+    ports:
+      - 80:80
+    links:
+      -  fallback_cache_1:fallback_cache_1
+      -  fallback_cache_2:fallback_cache_2
+    depends_on:
+      - fallback_cache_1
+      - fallback_cache_2
+
   fallback_cache_1:
     image: ildarfatikhov/fallback_cache:latest
     environment:
-      - DB_HOST=redis
+      - DB_HOST=r_master
       - DB_PORT=6379
-    ports:
-      - 8080:8080
+      - GM_API_KEY=AIzaSyDbtiyAR43Zw-PdBa9z-wP2akgCr5jJmxk
     depends_on:
-      - redis
+      - r_master
 
-  redis:
+  fallback_cache_2:
+    image: ildarfatikhov/fallback_cache:latest
+    environment:
+      - DB_HOST=r_master
+      - DB_PORT=6379
+      - GM_API_KEY=AIzaSyDbtiyAR43Zw-PdBa9z-wP2akgCr5jJmxk
+    depends_on:
+      - r_master
+
+  r_master:
     image: redis:latest
-    ports:
-        - "6379"
+  r_slave:
+    image: redis:latest
+    links:
+      - r_master:redis-master
+  r_sentinel:
+    image: joshula/redis-sentinel
+    environment:
+      - SENTINEL_DOWN_AFTER=5000
+      - SENTINEL_FAILOVER=5000
+    links:
+      - r_master:redis-master
+      - r_slave
+

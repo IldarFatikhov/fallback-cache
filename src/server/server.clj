@@ -16,7 +16,6 @@
       (or-else)
       ret)))
 
-
 (defn ask [address]
   (log/info address)
   (with-timeout
@@ -24,8 +23,15 @@
     #(client/get-response-with-retries address)
     #(cache/retrieve-cached-response address)))
 
+(defn cache-first-ask [address]
+  (log/info address)
+  (let [cached-result (cache/retrieve-cached-response address)]
+    (client/get-response-with-retries address)
+    cached-result))
+
 (defroutes routes
   (GET "/geocode" [address] (ask address))
+  (GET "/cache-first/geocode" [address] (cache-first-ask address))
   (not-found "Page not found."))
 
 (defn start-me []

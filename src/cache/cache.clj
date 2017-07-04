@@ -13,6 +13,9 @@
   (future (wcar server-connection (car/set key value))))
 
 (defn retrieve-cached-response [address]
-  (log/info "Info by key " address "retrieved from cache")
-  (wcar server-connection (car/get address)))
+  (log/info "Try to retrieve value by key -- " address)
+  (let [value (wcar server-connection (car/get address))]
+    (if (nil? value)
+      (log/info "Value by key -- " address " not cached yet")
+      value)))
 
