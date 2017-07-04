@@ -2,8 +2,8 @@
  :port 8080
  :retry {:retry-num 3
          :delay-ms 500}
- :db {:host #env DB_HOST
-      :port #env DB_PORT
+ :db {:host #or [#env DB_HOST "localhost"]
+      :port #or [#env DB_PORT 6379] 
       :timeout 4000}
  :api-key #env GM_API_KEY
  :lag-bound 4000}
